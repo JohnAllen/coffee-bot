@@ -2,7 +2,7 @@
 
 **Disclaimer**
 
-*I am not a trained electrician or electrical engineer.  Please be super careful and thoroughly understand the risks you are taking when working with electronics, especially 120 volts when working with wall-powered appliances.  Kettles and other heating elements that can be left on when your Pi or code fails can obviously be __very dangerous__. I am not responsible for any mishaps or injuries.  I suggest you keep your wall appliances plugged into a separate multi-outlet extension from your Pi (that needs to stay on) so you can easily determine whether or not there is 120V in your creation while testing.  __Never__ work with any electronics that are powered.*
+*I am not a trained electrician or electrical engineer.  Please be super careful and thoroughly understand the risks you are taking when working with electronics, especially 120 volts when working with wall-powered appliances.  Kettles and other heating elements that can be left on when your Pi or code fails can obviously be __very dangerous__. I am not responsible for any mishaps or injuries.  __Never__ work with any electronics that are powered.*
 
 **Background**
 
@@ -41,13 +41,26 @@ Below are the most salient parts if you want to build your own or something simi
 - [Bunches of wires](http://www.amazon.com/Kalevel%C2%AE-120pcs-Multicolored-Female-Breadboard/)
 - [This burr coffee grinder](http://amzn.com/B004T6EJS0)
 - [Wire connectors for the appliances](http://www.amazon.com/gp/product/B004X32N5U)
-- [This is the cold water pump.  From the aquarium to the kettle](http://www.amazon.com/gp/product/B0018WVNX2)
+- [This is the cold water pump: from the aquarium to the kettle](http://www.amazon.com/gp/product/B0018WVNX2)
 - [14 gauge wire for the wall appliances](http://www.amazon.com/Grand-General-55241-14-Gauge-Primary/)
 - [Power supply for the 12V hot water pump](http://www.amazon.com/JBtek-Breadboard-Supply-Arduino-Solderless/dp/B010UJFVTU)
 
-**Other Electronics Items You Probably Want to Own**
+**Other Parts You Probably Want to Own**
 - [Alligator wires for testing circuits](http://www.amazon.com/gp/product/B0002KRABU)
 - [A multimeter also for testing circuits](http://www.amazon.com/Etekcity-Digital-Multimeter-Tester-Measurement/dp/B00B7CS3UY)
 - [Breadboards](http://www.amazon.com/Frentaly%C2%AE-Solderless-BreadBoard-tie-points-power/dp/B01258UZMC)
+- [Assorted screws](http://www.amazon.com/Hillman-Group-591519-Assortment-195-Pack/dp/B00CR8ZRE2)
 
+**Code**
 
+- The Coffee Bot runs a Node.js & Express server.  All it does is run a series of functions in a row: pump cold water for *s* seconds; heat that water for *x* seconds; grind coffee for *z* seconds; and finally pump the heated water into the French Press.
+- It uses [Async's](https://github.com/caolan/async) handy [series](https://github.com/caolan/async#seriestasks-callback) control flow.  You simply create an array (or object) of functions that run in order, or in series.
+- If you've never written code that changes physical space, I suggest you try it sometime.  Even getting software to stop and start a motor was exhilirating for me.
+- The [final function] in the code is an important one.  It turns everything off.
+
+**Tips and Takeaways**
+
+- Say you build something with two wall appliances.  Get a separate multi-outlet extension that has only the wall appliances plugged into it.  You'll be able to easily determine whether or not 120V is flowing through your application.
+- **Relays**  The center terminal is the hot/positive/ terminal.  Why are there two other terminals?  One is normally open, or off.  The other is normally closed.  This is actually indicated on the relay.  See the lines?  On the left side, the line does not connect with the center terminal.  On the right the line connects.  This is your hint.
+- ![Relay](
+-   
