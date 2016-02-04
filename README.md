@@ -60,7 +60,9 @@ Below are the most salient parts if you want to build your own or something simi
 
 **Tips and Takeaways**
 
-- Say you build something with two wall appliances.  Get a separate multi-outlet extension that has only the wall appliances plugged into it.  You'll be able to easily determine whether or not 120V is flowing through your application.
+- Say you're build something with two wall appliances.  Get a separate multi-outlet extension that has only the wall appliances plugged into it.  You'll be able to easily determine whether or not 120V is flowing through your application and unplug it while debugging and testing.
 - **Relays**  The center terminal is the hot/positive/ terminal.  Why are there two other terminals?  One is normally open, or off.  The other is normally closed.  This is actually indicated on the relay.  See the lines?  On the left side, the line does not connect with the center terminal.  On the right the line connects.  This is your hint.
-- ![Relay](
--   
+
+<img src="https://github.com/JohnAllen/coffee-bot/blob/master/relay-closeup.png" alt="relay closeup" width="150px" height="150px">
+
+
