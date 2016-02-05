@@ -39,7 +39,7 @@ There were three main goals I was looking to achieve:
 Below are the most salient parts if you want to build your own or something similar.  
 
 - [The Raspberry Pi itself](http://www.amazon.com/CanaKit-Raspberry-Complete-Starter-9-Items/dp/B008XVAVAW/)
-- [A 2.5 gallon aquarium like this one](http://www.amazon.com/All-Glass-Aquarium-AAG10002-2-5-Gallon/dp/B0002AS1PE/) These will hold approximately 28 300 gram servings of coffee/water.  
+- [A 2.5 gallon aquarium like this one](http://www.amazon.com/All-Glass-Aquarium-AAG10002-2-5-Gallon/dp/B0002AS1PE/) These will hold enough water for nearly thirty 300-gram servings of coffee.  More than a week's supply.
 - 1" * 8" * 8' wood
 - [A four channel relay](http://amzn.com/B00KTEN3TM)
 - [Bunches of wires](http://www.amazon.com/Kalevel%C2%AE-120pcs-Multicolored-Female-Breadboard/)
@@ -67,7 +67,7 @@ Below are the most salient parts if you want to build your own or something simi
 
 - Say you're build something with two wall appliances.  Get a separate multi-outlet extension that has only the wall appliances plugged into it.  You'll be able to easily determine whether or not 120V is flowing through your application and unplug it while debugging and testing.
 - **Relays**  
-  - The relays may be the most important part of this whole project.  They are the switches, essentially, that allow us to turn off and on electronic components that otherwise use too much power for the Raspberry Pi.  
+  - The __relays may be the most important part__ of this whole project.  They are the switches, essentially, that allow us to turn off and on electronic components that otherwise use too much power for the Raspberry Pi.  
   - The high power components bust be electrically isolated from the Pi.  The Pi must be insulated from the 8 amps of current the hot water kettle draws.  
   - The relays, called [Opto-Isolators](https://en.wikipedia.org/wiki/Opto-isolator), operate like two light houses.  When light from one is shining, the other sees that light and connects electricity on its end.
   - The center terminal is the hot/positive/ terminal.  Why are there _two_ other terminals?  One is normally open, or off.  The other is normally closed or on.  This is actually indicated on the relay.  See the white lines in the foreground?  On the left side, the line does not connect with the center terminal.  On the right side the line connects.  This is your hint.  For wall appliances, you almost certainly want normally off or else they will run while your Pi is booting or has crashed.  Not good.
