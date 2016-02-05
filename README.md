@@ -66,14 +66,16 @@ Below are the most salient parts if you want to build your own or something simi
 **Tips and Takeaways**
 
 - Say you're build something with two wall appliances.  Get a separate multi-outlet extension that has only the wall appliances plugged into it.  You'll be able to easily determine whether or not 120V is flowing through your application and unplug it while debugging and testing.
+
 - **Relays**  
-  - The __relays may be the most important part__ of this whole project.  They are the switches, essentially, that allow us to turn off and on electronic components that otherwise use too much power for the Raspberry Pi.  
+  - The __relays may be the most important part__ of this whole project.  They are the switches that allow us to turn off and on electronic components that otherwise use too much power for the Raspberry Pi.  
   - The high power components bust be electrically isolated from the Pi.  The Pi must be insulated from the 8 amps of current the hot water kettle draws.  
   - The relays, called [Opto-Isolators](https://en.wikipedia.org/wiki/Opto-isolator), operate like two light houses.  When light from one is shining, the other sees that light and connects electricity on its end.
   - The center terminal is the hot/positive/ terminal.  Why are there _two_ other terminals?  One is normally open, or off.  The other is normally closed or on.  This is actually indicated on the relay.  See the white lines in the foreground?  On the left side, the line does not connect with the center terminal.  On the right side the line connects.  This is your hint.  For wall appliances, you almost certainly want normally off or else they will run while your Pi is booting or has crashed.  Not good.
+  - One important to understand about the relays is that they are rated for a maximum amount of current.  The ones I used are rated for a maximum of 10 amps.  How much current does your appliance draw?  That's easy, just find out the wattage which is always provided.  Divide the wattage by 120V, if you're in the United States and whatever your wall ("mains" as the British would say) provides in volts and you will get the current your appliance draws in amps.  
+    >````amps = wattage/power / volts````
 
     <img src="https://github.com/JohnAllen/coffee-bot/blob/master/relay-closeup.png" alt="relay closeup" width="150px" height="150px">
 - I found the same aquarium from Petsmart for ~$13, not $30+ on Amazon.
-- 
 
 
