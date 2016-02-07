@@ -19,7 +19,7 @@ Most ways of making coffee require at least five steps:
 
 That sucks!
 
-So as part of my career transition from finance to technology, I asked for a Raspberry Pi for Christmas to work on projects.  I got one.  A [Raspberry PI 2 Model B](https://www.raspberrypi.org/products/raspberry-pi-2-model-b/), which is super powerful.  Then I started dreaming of all the things I could make with it.  Turns out you can make basically anything.  Pis run Linux, which means you can run many apps and seemingly every computer on them.  Awesome. 
+As part of my career transition from finance to technology, I asked for a Raspberry Pi for Christmas to work on projects.  I got one.  A [Raspberry PI 2 Model B](https://www.raspberrypi.org/products/raspberry-pi-2-model-b/), which is super powerful.  Then I started dreaming of all the things I could make with it.  Turns out you can make basically anything.  Pis run Linux, which means you can run many apps and seemingly every computer on them.  Awesome. 
 
 So after a week of owning a Raspberry Pi and pondering what I could do with it, the idea of making a coffee maker came back to mind.  It was definitely the idea I was most passionate about.  It was also something I would use every day.  Something that would save me ten minutes every day.  So it would pay off.  Could I actually make a coffee machine?  What would I have to accomplish?  What parts do I need?  How many different components would it need?  What language would I write it in?
 
@@ -62,6 +62,7 @@ Below are the most salient parts if you want to build your own or something simi
 
 - Say you're build something with two wall appliances.  Get a separate multi-outlet extension that has only the wall appliances plugged into it.  You'll be able to easily determine whether or not 120V is flowing through your application and unplug it while debugging and testing.
 - **Relays**  
+  - The relays seems to be the most important part of this contraption.  They are the switches that turn off and on the appliance.  These relays are [opto-isolators](https://en.wikipedia.org/wiki/Opto-isolator).  They work like two lighthouses signalling one another.  When one turns on its light, the other sees that and connects a circuit.  The current the relays are rated for, 10 amps, is isolated from the much lower current Raspberry Pi with air, a poor conductor.
   - The center terminal is the hot/positive/ terminal.  Why are there two other terminals?  One is normally open, or off.  The other is normally closed.  This is actually indicated on the relay.  See the lines?  On the left side, the line does not connect with the center terminal.  On the right the line connects.  This is your hint.
   - <img src="https://github.com/JohnAllen/coffee-bot/blob/master/images/relay-closeup.png" alt="relay closeup" width="150px" height="150px">
 
