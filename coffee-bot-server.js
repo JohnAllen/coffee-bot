@@ -28,10 +28,10 @@ makeCoffee = function (numCups, testing) {
       } else {
         console.log('PRODUCTION: we are in production. ');
         console.log('Don\'t forget to add testing as a command line arg if testing');
-        coldWaterSecsCup = 4.5;    // number of secs per cup passed from user to pump water into hot water kettle
+        coldWaterSecsCup = 4.22;    // How long to pump coldwater into kettle per cup.  300 gram cups; approx 71 grams of water per sec.  
         heatTimePerCup = 180 + (numCups * 55) + 60 /* wait a miunute after brew begins */;  // number of seconds hot water kettle must be on to heat water
         hotWaterPumpSecsCup = 10;    // number of seconds to pump heater water from kettle to coffee brewing apparatus
-        grindTimePerCup = 4;   // number of seconds grinder needs to grind 20 grams, or one cup worth of coffee
+        grindTimePerCup = 20 / 1.5;   // grams divided by grams ground per second
       }
       // Setup pins for wiringPi(Python)/wiring-pi(npm) library
       coldWaterPump = 0;  // pin that switches cold water pump off/on
