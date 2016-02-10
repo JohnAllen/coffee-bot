@@ -1,7 +1,16 @@
 .btn-column {
-  margin-top: 250px !important;
+  margin-top: 200px !important;
 }
 
 .margin-top {
   margin-top: 0.45em !important;
+}
+
+.hidden {
+  position: absolute;
+  left: -1000px;
+}
+
+#counter {
+  height: 1.5em;
 }

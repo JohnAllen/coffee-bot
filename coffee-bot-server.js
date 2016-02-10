@@ -29,7 +29,7 @@ makeCoffee = function (numCups, testing) {
         console.log('PRODUCTION: we are in production. ');
         console.log('Don\'t forget to add testing as a command line arg if testing');
         coldWaterSecsCup = 4.5;    // number of secs per cup passed from user to pump water into hot water kettle
-        heatTimePerCup = 180;  // number of seconds hot water kettle must be on to heat each cup of water.  Assumed to be linear at this time (1-10-2016)
+        heatTimePerCup = 180 + (numCups * 55) + 60 /* wait a miunute after brew begins */;  // number of seconds hot water kettle must be on to heat water
         hotWaterPumpSecsCup = 10;    // number of seconds to pump heater water from kettle to coffee brewing apparatus
         grindTimePerCup = 4;   // number of seconds grinder needs to grind 20 grams, or one cup worth of coffee
       }
@@ -125,9 +125,9 @@ app.use('/cups', function cupsMiddleware(req, res, next) {
     var numCups = parseInt(req.body.cups);
   else throw new Error('No numCups passed');
   makeCoffee(numCups, testing);
-  res.redirect('/coffee.html');
+//  res.redirect('coffee.html');
 });
 
 app.use(serveStatic(__dirname, {'index': ['coffee.html']}));
 console.log('Coffee Bot server started. Ready to brew');
-app.listen(80);
+app.listen(8080);

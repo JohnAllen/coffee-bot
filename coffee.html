@@ -5,35 +5,65 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" type="text/css" href="coffee.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="semantic.min.css" />
+    <Script src="jquery.js"></script>
   </head>
   <body>
       <div class="ui container">
         <h1 class="margin-top ui center aligned header">Coffee Bot</h1>
         <hr>
         <div class="btn-column ui one column grid center aligned">
+          <div class="ui twelve wide column">
+	    <div id="counter"></div>
+	  </div>
           <div class="twelve wide column">
-            <button class="ui massive black basic button">
+            <button class="cups ui massive black basic button">
               <div class="ui center aligned">
                 <img src="images/mug14.png" alt="">
+                <img src="images/mug14.png" alt="">
+                <img src="images/mug14.png" alt="">
+                <p class="hidden">3</p>
+              </div>
+            </button>
+          </div>
+          <div class="twelve wide column">
+            <button class="cups ui massive black basic button">
+              <div class="ui center aligned">
+                <p class="hidden">2</p>
                 <img src="images/mug14.png" alt="">
                 <img src="images/mug14.png" alt="">
               </div>
             </button>
           </div>
           <div class="twelve wide column">
-            <button class="ui massive black basic button">
-              <div class="ui center aligned">
-                <img src="images/mug14.png" alt="">
-                <img src="images/mug14.png" alt="">
-              </div>
-            </button>
-          </div>
-          <div class="twelve wide column">
-            <button class="ui massive black basic button">
+            <button class="cups ui massive black basic button">
+              <p class="hidden">1</p>
               <img src="images/mug14.png" alt="">
             </button>
           </div>
         </div>
       </div>
+      <script>
+        $(".cups").click(function (event) {
+          event.preventDefault();
+          var count = $(this).find('p.hidden').html();
+//	  $('#counter').append('Brewing you ' + count ' cups of coffee.');
+	  var totalSecs = 180 + (55 * count) + 60;
+	  var secsDiv = '<p class="ui large header seconds"> ' + totalSecs + ' seconds left</p>';
+          $('#counter').append(secsDiv);
+          setInterval(function () {
+            totalSecs--;
+            $('#counter p.seconds').text(totalSecs + " seconds left");        
+          }, 1000);
+          $.ajax({
+            type: "POST",
+            url: "http://coffee-bot/cups",
+            dataType: "json",
+            data: JSON.stringify({cups: $(this).find('p.hidden').html()}),
+            contentType: "application/json",
+            success: function() {console.log("success!");},
+            error: function() {console.log('process error');}
+          });
+        });
+        </script>
   </body>
 </html>
