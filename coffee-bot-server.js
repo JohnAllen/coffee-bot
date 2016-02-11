@@ -10,17 +10,16 @@ var app = connect();
 app.use(bodyParser);
 
 turnOn = function (device) { wpi.digitalWrite(device, 0);};
-turnOff = function (device) { wpi.digitalWrite(device, 1);};
+turnOff = function (device) { wpi.digitalWrite(device, 1);};  // Relays are normally open or off. 
 
 makeCoffee = function (numCups, testing) {
-
   async.series({
     runSetup: function (callback) {
       console.log("Setting device pin modes and seconds per cup");
 
-      // Hardware time constants.  How long do we run each appliance per cup of coffee.
+      // Hardware time constants.  How long do we run each appliance per cup of coffee?
       if (testing) {
-        console.log('TESTING Setting device secs/timer to two seconds each because TESTING');
+        console.log('TESTING: Setting device secs/timer to two seconds each because TESTING');
         coldWaterSecsCup = 2;    // number of secs per cup passed from user to pump water into hot water kettle
         heatTimePerCup = 2;  // number of seconds hot water kettle must be on to heat each cup of water.  Assumed to be linear at this time (1-10-2016)
         hotWaterPumpSecsCup = 2;    // number of seconds to pump heater water from kettle to coffee brewing apparatus
@@ -29,25 +28,27 @@ makeCoffee = function (numCups, testing) {
         console.log('PRODUCTION: we are in production. ');
         console.log('Don\'t forget to add testing as a command line arg if testing');
         coldWaterSecsCup = 4.22;    // How long to pump coldwater into kettle per cup.  300 gram cups; approx 71 grams of water per sec.  
-        heatTimePerCup = 180 + (numCups * 55) + 60 /* wait a miunute after brew begins */;  // number of seconds hot water kettle must be on to heat water
+        heatTimePerCup = 180 + (numCups * 55) + 60;  // number of seconds hot water kettle must be on to heat water.
+        // ^ Add 60 seconds for coffee sitting at top of French Press water
         hotWaterPumpSecsCup = 10;    // number of seconds to pump heater water from kettle to coffee brewing apparatus
-        grindTimePerCup = 20 / 1.5;   // grams divided by grams ground per second
+        grindTimePerCup = 20 / 1.5;   // grams per cup divided by grams ground per second
       }
-      // Setup pins for wiringPi(Python)/wiring-pi(npm) library
-      coldWaterPump = 0;  // pin that switches cold water pump off/on
-      kettle = 2;  // pin that turns hot water kettle off/on
-      grinder = 3;  // pin that turns on grinder
-      grinderRelay = 5;
-      hotWaterPump = 4;  // pin that turns on pump that pumps water from hot water kettle to coffee devicePump
+      // Setup pins for wiring-pi library
+      coldWaterPump = 0;  // pin for cold water aquarium pump off/on
+      kettle = 2;         // pin that turns hot water kettle off/on
+      grinder = 3;        // pin that turns on power to grinder
+      grinderRelay = 5;   // Extra relay for grinder relay.  Must turn this on then off for internal grinder logic to run 
+      hotWaterPump = 4;   // pin that turns on pump that pumps water from hot water kettle to French Press
 
       // Pin modes - pumps and kettle are outs
+      // Each wpi.digitalWrite ensures appliances are off at startup
       wpi.pinMode(coldWaterPump, wpi.OUTPUT); // pin for coldwater pump
       wpi.digitalWrite(coldWaterPump, 1);
 
-      wpi.pinMode(kettle, wpi.OUTPUT);  // pin for kettle off/on
+      wpi.pinMode(kettle, wpi.OUTPUT);        // pin for kettle off/on
       wpi.digitalWrite(kettle, 1);
 
-      wpi.pinMode(grinder, wpi.OUTPUT);  // pin for kettle off/on
+      wpi.pinMode(grinder, wpi.OUTPUT);       // pin for kettle off/on
       wpi.digitalWrite(grinder, 1);
 
       wpi.pinMode(hotWaterPump, wpi.OUTPUT);  // pin for hot water pump
@@ -59,7 +60,7 @@ makeCoffee = function (numCups, testing) {
       callback();
     },
     pumpColdWater: function (callback) {
-      console.log('Pumping cold water');
+      console.log('Pumping cold water into kettle');
       turnOn(coldWaterPump);
       setTimeout(function () {
         console.log('Turning off cold water pump');
@@ -68,24 +69,25 @@ makeCoffee = function (numCups, testing) {
       }, coldWaterSecsCup * 1000 * numCups);
     },
     heatWater: function (callback) {
-      console.log('Turning OFF SECOND/YELLOW light');
       turnOn(kettle);
       setTimeout(function () {
-        console.log('Turning OFF kettle');
+        console.log('Turning kettle off');
         turnOff(kettle);
         callback(null);
       }, heatTimePerCup * 1000 * numCups);
     },
     grindCoffee: function (callback) {
-      console.log('Turning on GRINDER');
-      turnOn(grinder);
+      console.log('Turning on grinder');
+      turnOn(grinder);  //  Power for grinder.  Grinder does not turn on at this time.  Must turn on & off extra relay below
+    
+      //  Delay for extra grinder relay operations//  Delay for extra grinder relay operations
       setTimeout(function () {
-        console.log('Turning on grinderRelay');
+        console.log('Turning off grinder');
         turnOn(grinderRelay);
       }, 400);
 
       setTimeout(function () {
-        console.log('Turning OFF grinderRelay');
+        console.log('Turning off grinderRelay');
         turnOff(grinderRelay);
       }, 800);
 
@@ -93,13 +95,11 @@ makeCoffee = function (numCups, testing) {
         console.log('Turning off grinder');
         turnOff(grinder);
         callback(null);
-      }, 1000 + grindTimePerCup * 1000 * numCups);
+      }, 1000 + grindTimePerCup * 1000 * numCups);  //  Extra 1000 ms to ensure too dark and not too light
     },
     pumpHotWater: function (callback) {
-      console.log('Turning on THIRD/RED light');
       turnOn(hotWaterPump);
       setTimeout(function () {
-        console.log('Turning OFF THIRD/RED light');
         turnOff(hotWaterPump);
         callback(null);
       }, hotWaterPumpSecsCup * 1000 * numCups);
@@ -111,23 +111,21 @@ makeCoffee = function (numCups, testing) {
       });
     }
   });
-
 };
 
+// Check if testing mode.  Pass extra command line "testing" for testing mode.
 testing = false;
 if (process.argv[2] === 'testing') {
   testing = true;
 }
 
 app.use('/cups', function cupsMiddleware(req, res, next) {
-
   if (req.body.cups)
     var numCups = parseInt(req.body.cups);
   else throw new Error('No numCups passed');
   makeCoffee(numCups, testing);
-//  res.redirect('coffee.html');
 });
 
 app.use(serveStatic(__dirname, {'index': ['coffee.html']}));
-console.log('Coffee Bot server started. Ready to brew');
+console.log('Coffee Bot server started. Ready to brew.');
 app.listen(8080);
