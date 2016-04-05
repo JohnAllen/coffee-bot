@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Coffee-bot by JohnAllen</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">Coffee-bot</h1>
+        <p class="header">Code and information about Coffee Bot - a remote-control high-capacity coffee machine</p>
+
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/JohnAllen/coffee-bot/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/JohnAllen/coffee-bot/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/JohnAllen/coffee-bot">View On GitHub</a></li>
+        </ul>
+
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/JohnAllen">JohnAllen</a></p>
+
+
+      </header>
+      <section>
+        <h1>
+<a id="coffee-bot" class="anchor" href="#coffee-bot" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Coffee Bot</h1>
+
+<p><strong>Disclaimer</strong></p>
+
+<p><em>I am not a trained electrician or electrical engineer.  Please be super careful and thoroughly understand the risks you are taking when working with electronics, especially 120 volts when working with wall-powered appliances.  Kettles and other heating elements that can be left on when your Pi or code fails can obviously be <strong>very dangerous</strong>. I am not responsible for any mishaps or injuries.  <strong>Never</strong> work with any electronics that are plugged in.</em></p>
+
+<h1>
+<a id="background" class="anchor" href="#background" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Background</h1>
+
+<p>For years I have wanted to automate the process of making coffee in the morning.  I love drinking coffee but despise making it every morning.  It's literally the worst time to have to do complete a bunch of processes just to get going.  Especially when the process takes ten minutes and requires multiple steps to complete. The problem is similar to getting a car empty of gas to a gas station.</p>
+
+<p>Most ways of making coffee require at least five steps:</p>
+
+<ul>
+<li>Get the coffee, grind it</li>
+<li>When it's good coffee, weigh it</li>
+<li>Get a filter or retrieve your French Press</li>
+<li>Heat and/or add water to the machine</li>
+<li>Turn on the coffee machine</li>
+<li>Wait four to five minutes</li>
+</ul>
+
+<p>That sucks!</p>
+
+<p>As part of my career transition from finance to technology, I started working with a Raspberry Pi after I getting one for Christmas to work on projects.  Then I started dreaming of all the things I could make with it.  Turns out you can make basically anything.  Pis run Linux, which means you can run many apps and seemingly every computer on them.  Awesome. </p>
+
+<p>So after a week of owning a Raspberry Pi and pondering what I could do with it, the idea of making a coffee maker came back to mind.  It was definitely the idea I was most passionate about.  It was also something I would use every day.  Something that would save me ten minutes every day.  So it would pay off.  Could I actually make a coffee machine?  What would I have to accomplish?  What parts do I need?  How many different components would it need?  What language would I write it in?</p>
+
+<h2>
+<a id="design-goals" class="anchor" href="#design-goals" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Design Goals</h2>
+
+<p>There were three main goals I was looking to achieve:</p>
+
+<ul>
+<li>Reduce the number of steps required to make coffee</li>
+<li>Eliminate the wait time of ~10 minutes</li>
+<li>Minimize the frequency of water and coffee refills</li>
+</ul>
+
+<h2>
+<a id="parts" class="anchor" href="#parts" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Parts</h2>
+
+<p>Below are the most salient parts if you want to build your own or something similar.  </p>
+
+<ul>
+<li><a href="http://www.amazon.com/CanaKit-Raspberry-Complete-Starter-9-Items/dp/B008XVAVAW/">The Raspberry Pi itself</a></li>
+<li>
+<a href="http://www.amazon.com/All-Glass-Aquarium-AAG10002-2-5-Gallon/dp/B0002AS1PE/">A 2.5 gallon aquarium like this one</a> These will hold approximately 28 300 gram servings of water.<br>
+</li>
+<li>1"<em>8"</em>8' wood</li>
+<li><a href="http://amzn.com/B00KTEN3TM">A four channel relay</a></li>
+<li><a href="http://www.amazon.com/Kalevel%C2%AE-120pcs-Multicolored-Female-Breadboard/">Bunches of wires</a></li>
+<li><a href="http://amzn.com/B004T6EJS0">This burr coffee grinder</a></li>
+<li><a href="http://www.amazon.com/gp/product/B004X32N5U">Wire connectors for the appliances</a></li>
+<li><a href="http://www.amazon.com/gp/product/B0018WVNX2">This is the cold water pump: from the aquarium to the kettle</a></li>
+<li><a href="http://www.amazon.com/Grand-General-55241-14-Gauge-Primary/">14 gauge wire for the wall appliances</a></li>
+<li><a href="http://www.amazon.com/JBtek-Breadboard-Supply-Arduino-Solderless/dp/B010UJFVTU">Power supply for the 12V hot water pump</a></li>
+</ul>
+
+<h3>
+<a id="other-parts-you-probably-want-to-own" class="anchor" href="#other-parts-you-probably-want-to-own" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Other Parts You Probably Want to Own</h3>
+
+<ul>
+<li><a href="http://www.amazon.com/gp/product/B0002KRABU">Alligator wires for testing circuits</a></li>
+<li><a href="http://www.amazon.com/Etekcity-Digital-Multimeter-Tester-Measurement/dp/B00B7CS3UY">A multimeter also for testing circuits</a></li>
+<li><a href="http://www.amazon.com/Frentaly%C2%AE-Solderless-BreadBoard-tie-points-power/dp/B01258UZMC">Breadboards</a></li>
+<li><a href="http://www.amazon.com/Hillman-Group-591519-Assortment-195-Pack/dp/B00CR8ZRE2">Assorted screws</a></li>
+</ul>
+
+<h2>
+<a id="code" class="anchor" href="#code" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Code</h2>
+
+<ul>
+<li>The Coffee Bot runs a Node.js &amp; Express server.  All it does is run a series of functions in a row: pump cold water for <em>s</em> seconds; heat that water for <em>x</em> seconds; grind coffee for <em>z</em> seconds; and finally pump the heated water into the French Press.</li>
+<li>It uses <a href="https://github.com/caolan/async">Async's</a> handy <a href="https://github.com/caolan/async#seriestasks-callback">series</a> control flow.  You simply create an array (or object) of functions that run in order, or in series.</li>
+<li>If you've never written code that changes physical space, I suggest you try it sometime.  Even getting software to stop and start a motor was exhilirating for me.</li>
+<li>The [final function] in the code is an important one.  It turns everything off.</li>
+</ul>
+
+<h3>
+<a id="tips-and-takeaways" class="anchor" href="#tips-and-takeaways" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Tips and Takeaways</h3>
+
+<ul>
+<li>Say you're build something with two wall appliances.  Get a separate multi-outlet extension that has only the wall appliances plugged into it.  You'll be able to easily determine whether or not 120V is flowing through your application and unplug it while debugging and testing.</li>
+<li>
+<strong>Relays</strong><br>
+
+<ul>
+<li>The relays seems to be the most important part of this contraption.  They are the switches that turn off and on the appliance.  These relays are <a href="https://en.wikipedia.org/wiki/Opto-isolator">opto-isolators</a>.  They work like two lighthouses signalling one another.  When one turns on its light, the other sees that and connects a circuit.  The current the relays are rated for, 10 amps, is isolated from the much lower current Raspberry Pi with air, a poor conductor.</li>
+<li>The center terminal is the hot/positive/ terminal.  Why are there two other terminals?  One is normally open, or off.  The other is normally closed.  This is actually indicated on the relay.  See the lines?  On the left side, the line does not connect with the center terminal.  On the right the line connects.  This is your hint.</li>
+<li><img src="https://github.com/JohnAllen/coffee-bot/blob/master/images/relay-closeup.png" alt="relay closeup" width="150px" height="150px"></li>
+</ul>
+</li>
+</ul>
+
+<h3>
+<a id="user-interface" class="anchor" href="#user-interface" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>User Interface</h3>
+
+<p>Coffee Bot has a simple user interface, with just three buttons.  The buttons are situated at the bottom to make pressing the buttons as easy as possible after just waking up.</p>
+
+<p><img src="https://github.com/JohnAllen/coffee-bot/blob/master/images/ui-screenshot_iphone6_spacegrey_portrait.png" alt="Simple interface" align="left">
+<img src="https://github.com/JohnAllen/coffee-bot/blob/master/images/ui-bed-image.jpg" alt="" height="350px" align="left"></p>
+      </section>
+      <footer>
+        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		
+  </body>
+</html>
