@@ -7,8 +7,7 @@
 
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/github-light.css">
-    <script src="javascripts/scale.fix.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="viewport" content="width=device-width">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -16,18 +15,17 @@
   <body>
     <div class="wrapper">
       <header>
-        <h1 class="header">Coffee-bot</h1>
-        <p class="header">Code and information about Coffee Bot - a remote-control high-capacity coffee machine</p>
+        <h1>Coffee-bot</h1>
+        <p>Code and information about Coffee Bot - a remote-control high-capacity coffee machine</p>
+
+        <p class="view"><a href="https://github.com/JohnAllen/coffee-bot">View the Project on GitHub <small>JohnAllen/coffee-bot</small></a></p>
+
 
         <ul>
-          <li class="download"><a class="buttons" href="https://github.com/JohnAllen/coffee-bot/zipball/master">Download ZIP</a></li>
-          <li class="download"><a class="buttons" href="https://github.com/JohnAllen/coffee-bot/tarball/master">Download TAR</a></li>
-          <li><a class="buttons github" href="https://github.com/JohnAllen/coffee-bot">View On GitHub</a></li>
+          <li><a href="https://github.com/JohnAllen/coffee-bot/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/JohnAllen/coffee-bot/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/JohnAllen/coffee-bot">View On <strong>GitHub</strong></a></li>
         </ul>
-
-        <p class="header">This project is maintained by <a class="header name" href="https://github.com/JohnAllen">JohnAllen</a></p>
-
-
       </header>
       <section>
         <h1>
@@ -91,7 +89,7 @@
 </ul>
 
 <h3>
-<a id="other-electronics-parts-you-probably-want-to-own" class="anchor" href="#other-electronics-parts-you-probably-want-to-own" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Other Electronics Parts You Probably Want to Own</h3>
+<a id="other-parts-you-probably-want-to-own" class="anchor" href="#other-parts-you-probably-want-to-own" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Other Parts You Probably Want to Own</h3>
 
 <ul>
 <li><a href="http://www.amazon.com/gp/product/B0002KRABU">Alligator wires for testing circuits</a></li>
@@ -106,8 +104,8 @@
 <ul>
 <li>The Coffee Bot runs a Node.js &amp; Express server.  All it does is run a series of functions in a row: pump cold water for <em>s</em> seconds; heat that water for <em>x</em> seconds; grind coffee for <em>z</em> seconds; and finally pump the heated water into the French Press.</li>
 <li>It uses <a href="https://github.com/caolan/async">Async's</a> handy <a href="https://github.com/caolan/async#seriestasks-callback">series</a> control flow.  You simply create an array (or object) of functions that run in order, or in series.</li>
-<li>If you've never written code that alters physical space, I suggest you try it sometime.  Even getting software to stop and start a motor was super fun.</li>
-<li>The final function in the code is an important one.  It turns everything off.</li>
+<li>If you've never written code that changes physical space, I suggest you try it sometime.  Even getting software to stop and start a motor was exhilirating for me.</li>
+<li>The [final function] in the code is an important one.  It turns everything off.</li>
 </ul>
 
 <h3>
@@ -131,14 +129,15 @@
 
 <p>Coffee Bot has a simple user interface, with just three buttons.  The buttons are situated at the bottom to make pressing the buttons as easy as possible after just waking up.</p>
 
-<p><img src="images/ui-screenshot_iphone6_spacegrey_portrait.png" alt="Simple interface" align="left">
+<p><img src="images/ui-screenshot_iphone6_spacegrey_portrait.png" alt="">
 <img src="https://github.com/JohnAllen/coffee-bot/blob/master/images/ui-bed-image.jpg" alt="" height="350px" align="left"></p>
       </section>
       <footer>
-        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+        <p>This project is maintained by <a href="https://github.com/JohnAllen">JohnAllen</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
       </footer>
     </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-		
+    <script src="javascripts/scale.fix.js"></script>
+    
   </body>
 </html>
