@@ -2,7 +2,7 @@
 
 **Disclaimer**
 
-*I am not a trained electrician or electrical engineer.  Please be super careful and thoroughly understand the risks you are taking when working with electronics, especially 120 volts when working with wall-powered appliances.  Kettles and other heating elements that can be left on when your Pi or code fails can obviously be __very dangerous__. I am not responsible for any mishaps or injuries.  __Never__ work with any electronics that are powered.*
+*I am not a trained electrician or electrical engineer.  Please be super careful and thoroughly understand the risks you are taking when working with electronics, especially 120 volts when working with wall-powered appliances.  Kettles and other heating elements that can be left on when your Pi or code fails can obviously be __very dangerous__. I am not responsible for any mishaps or injuries.  __Never__ work with any electronics that are plugged in.*
 
 **Background**
 
